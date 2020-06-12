@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t bpayet/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true bpayet/react-test npm test
+#  - docker run -e CI=true bpayet/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t bpayet/multi-client ./client
+  - docker build -t bpayet/multi-nginx ./nginx
+  - docker build -t bpayet/multi-server ./server
+  - docker build -t bpayet/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push bpayet/multi-client
+  - docker push bpayet/multi-nginx
+  - docker push bpayet/multi-server
+  - docker push bpayet/multi-worker
+
