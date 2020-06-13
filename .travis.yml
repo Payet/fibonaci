@@ -20,3 +20,14 @@ after_success:
   - docker push bpayet/multi-server
   - docker push bpayet/multi-worker
 
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: multi-docker
+  env: MultidockerEnv-env
+  bucket_name: elasticbeanstalk-eu-central-1-626934675359
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

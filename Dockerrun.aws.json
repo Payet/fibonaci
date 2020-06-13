@@ -1,0 +1,38 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "bpayet/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "bpayet/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "worker",
+      "image": "bpayet/multi-worker",
+      "hostname": "worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "bpayet/multi-nginx",
+      "hostname": "nginx",
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+
+      ],
+      "links": ["client", "server"],
+      "essential": true
+    }
+  ]
+
+}
