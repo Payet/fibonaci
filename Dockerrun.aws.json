@@ -23,6 +23,7 @@
       "name": "nginx",
       "image": "bpayet/multi-nginx",
       "hostname": "nginx",
+      "essential": true,
       "portMappings": [
         {
           "hostPort": 80,
@@ -30,8 +31,7 @@
         }
 
       ],
-      "links": ["client", "server"],
-      "essential": true
+      "links": ["client", "server"]
     }
   ]
 
