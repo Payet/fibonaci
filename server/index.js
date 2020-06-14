@@ -69,6 +69,12 @@ app.post('/values', async (req, res) => {
   redisPublisher.publish('insert', index);
   pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
 
+  //added
+  redisClient.get("values", function(err, reply) {
+      // reply is null when the key is missing
+      console.log("Redis values: " + reply);
+  });
+
   res.send({ working: true });
 });
 
