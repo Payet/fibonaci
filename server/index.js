@@ -35,6 +35,9 @@ const redisClient = redis.createClient({
 redisClient.on('error', function(err) {
      console.log('Redis client connection error: ' + err);
 });
+redisClient.on('connect', function() {
+    console.log('Redis client connected');
+});
 
 const redisPublisher = redisClient.duplicate();
 
