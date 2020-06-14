@@ -34,7 +34,11 @@ const redisClient = redis.createClient({
   port: 6379,
   retry_strategy: () => 1000
 });
-console.log("After Redis connection: " + redisClient);
+
+console.log("After Redis connection");
+client.set("mykey", "value42", redis.print);
+client.get("mykey", redis.print);
+
 //redisClient.on('error', () => console.log('Redis client connection error'));
 redisClient.on('error', function(err) {
      console.log('Redis client connection error: ' + err);
