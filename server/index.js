@@ -78,6 +78,12 @@ app.post('/values', async (req, res) => {
 
   console.log("Putting value into Redis: " + index);
   redisClient.hset('values', index, 'Nothing yet!');
+  console.log("Getting value from Redis: " + index);
+  // just returns the name of the hash
+  redisClient.hget("values", index, function (err, obj) {
+     console.log("HGET: "+obj);
+  });
+
   redisPublisher.publish('insert', index);
   pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
 
