@@ -30,7 +30,7 @@ const redis = require('redis');
 const redisClient = redis.createClient({
   //host: keys.redisHost,
   //port: keys.redisPort,
-  host: 'redis.qcxzjs.0001.euc1.cache.amazonaws.com',
+  host: 'multi-docker-redis.qcxzjs.0001.euc1.cache.amazonaws.com',
   port: 6379,
   retry_strategy: () => 1000
 });
