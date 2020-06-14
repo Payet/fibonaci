@@ -25,6 +25,7 @@ pgClient
   .catch(err => console.log(err));
 
 // Redis Client Setup
+console.log("Before Redis connection");
 const redis = require('redis');
 const redisClient = redis.createClient({
   //host: keys.redisHost,
@@ -33,6 +34,7 @@ const redisClient = redis.createClient({
   port: 6379,
   retry_strategy: () => 1000
 });
+console.log("After Redis connection: " + redisClient);
 //redisClient.on('error', () => console.log('Redis client connection error'));
 redisClient.on('error', function(err) {
      console.log('Redis client connection error: ' + err);
