@@ -36,7 +36,7 @@ const redisClient = redis.createClient({
 });
 
 console.log("After Redis connection");
-client.set("mykey", "value42", redis.print);
+client.set("mykey", "value21", redis.print);
 client.get("mykey", redis.print);
 
 //redisClient.on('error', () => console.log('Redis client connection error'));
