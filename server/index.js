@@ -31,7 +31,10 @@ const redisClient = redis.createClient({
   port: keys.redisPort,
   retry_strategy: () => 1000
 });
-redisClient.on('error', () => console.log('Redis client connection error'));
+//redisClient.on('error', () => console.log('Redis client connection error'));
+redisClient.on('error', function(err) {
+     console.log('Redis client connection error: ' + err);
+});
 
 const redisPublisher = redisClient.duplicate();
 
@@ -48,9 +51,11 @@ app.get('/values/all', async (req, res) => {
 });
 
 app.get('/values/current', async (req, res) => {
+  console.log('Retrieving current values from Redis...')
   redisClient.hgetall('values', (err, values) => {
     res.send(values);
   });
+  console.log('Current values try logic completed...')
 });
 
 app.post('/values', async (req, res) => {
