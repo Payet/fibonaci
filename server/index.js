@@ -55,7 +55,7 @@ app.get('/values/current', async (req, res) => {
   redisClient.hgetall('values', (err, values) => {
     res.send(values);
   });
-  console.log('Current values try logic completed...')
+  console.log('Current values try logic completed...' + new Date().getTime())
 });
 
 app.post('/values', async (req, res) => {
